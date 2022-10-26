@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "799162446519",
+    "project_id": "andriodfirebase-46b4d",
+    "storage_bucket": "andriodfirebase-46b4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799162446519:android:7578a2f138187ba66b1332",
+        "android_client_info": {
+          "package_name": "com.udacity.chatto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799162446519-j013g8303jr1v8242l7fuqljn9212o1n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.udacity.chatto",
+            "certificate_hash": "d65c2714222436b25391cd8d0924c164e899ced6"
+          }
+        },
+        {
+          "client_id": "799162446519-cejfjajj2eiu818t4616klpa386rjmnb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc-rXOfmx1-1PAVKSYvRfj4bJOdTPeXmQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799162446519-cejfjajj2eiu818t4616klpa386rjmnb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

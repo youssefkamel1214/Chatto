@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Chatto</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">Logout</string>
+    <string name="username">UserName</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="gallerypicking">pick image\n from gallery</string>
+    <string name="camerapicking">pick image\n from camera</string>
+    <string name="password">password</string>
+    <string name="change_to_log_in">change to log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="log_in">Log in</string>
+    <string name="change_to_sign_up">change to sign up</string>
+    <string name="change_to_email">change to Email</string>
+    <string name="change_to_phone">change to Phone</string>
+    <string name="pick_image_from_camera">pick image from camera</string>
+    <string name="pick_image_from_gallery">pick image from gallery</string>
+    <string name="picked_profile_image">picked profile image</string>
+    <string name="name">Name</string>
+    <string name="denied_camera">can\'t pick image permission not granted</string>
+    <string name="profile_image_error">you should choose image to your profile</string>
+    <string name="continue_with_facebook_authntication">continue with facebook authntication</string>
+    <string name="continue_with_google_authinitication">continue with google authinitication</string>
+    <string name="forget_password">forget password</string>
+    <string name="firebase_no_email">sorry no email matches your email</string>
+    <string name="firebase_wrong_password">wrong password</string>
+    <string name="nameerror">this field can not be empty</string>
+    <string name="passwordwrongfromat">password should contain atleast 1 capital charcter ,1 number and be more than 8 characters</string>
+    <string name="email_wrong_format">wrong email format</string>
+    <string name="your_profile_image">your profile image</string>
+    <string name="your_web_client_id" >799162446519-cejfjajj2eiu818t4616klpa386rjmnb.apps.googleusercontent.com</string>
+    <string name="google_sign_in_fail">opreation cancled failed to sign in</string>
+    <string name="firebase_email_exists">This email address  already exists</string>
+</resources>
