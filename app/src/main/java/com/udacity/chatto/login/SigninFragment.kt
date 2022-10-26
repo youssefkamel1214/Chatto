@@ -17,6 +17,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginBehavior
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -29,11 +35,13 @@ import com.udacity.chatto.MainViewmodel
 import com.udacity.chatto.R
 import com.udacity.chatto.databinding.FragmentSigninBinding
 import com.udacity.chatto.utils.Constants
+import java.util.*
 
 
 class SigninFragment : Fragment() {
     private lateinit var viewModel: SigninViewModel
     private lateinit var _binding: FragmentSigninBinding
+    val  callbackManager = CallbackManager.Factory.create()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +66,10 @@ class SigninFragment : Fragment() {
         _binding.googleButton.setOnClickListener {
             google_signin()
         }
+        _binding.facebookButton.setOnClickListener {
+            LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email","public_profile"))
+        }
+        handlefacebooklogin()
         viewModel.imageerror.observe(viewLifecycleOwner) { value ->
             if (value) {
                 Toast.makeText(
@@ -78,7 +90,29 @@ class SigninFragment : Fragment() {
         }
     }
 
-    private fun checkifloggedin() {
+    private fun handlefacebooklogin() {
+        // Callback registration
+        // Callback registration
+        LoginManager.getInstance().registerCallback(callbackManager,
+            object : FacebookCallback<LoginResult?> {
+                override fun onSuccess(loginResult: LoginResult?) {
+                    loginResult?.apply {
+                        accessToken?.apply {
+                            viewModel.signinwithfacebook(this)
+                        }
+                    }
+                }
+
+                override fun onCancel() {
+                    Toast.makeText(requireContext(),getString(R.string.facebook_cancel),Toast.LENGTH_LONG).show()
+                }
+
+                override fun onError(exception: FacebookException) {
+                    Log.e(Constants.signin_frag_debug,exception.message.toString())
+                }
+            })
+    }
+        private fun checkifloggedin() {
         val auth: FirebaseAuth = Firebase.auth
         if(auth.currentUser!=null){
             val mainveiwmodel=ViewModelProvider(requireActivity()).get(MainViewmodel::class.java)
@@ -134,7 +168,8 @@ class SigninFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-           when(requestCode){
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
                Constants.Pick_Image_Code   -> {
                    if (resultCode == RESULT_OK) {
                        val imageurl = data?.data!!
@@ -154,7 +189,6 @@ class SigninFragment : Fragment() {
                        handleGoogleSignin(data)
                }
            }
-
        }
 
     private fun handleGoogleSignin(data: Intent?) {

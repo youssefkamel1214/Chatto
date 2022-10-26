@@ -3,6 +3,7 @@ package com.udacity.chatto.login
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.*
+import com.facebook.AccessToken
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -18,6 +19,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 import java.util.regex.Pattern
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.auth.FacebookAuthProvider
 
 class SigninViewModel : ViewModel() {
     private  var auth: FirebaseAuth= Firebase.auth
@@ -199,6 +203,26 @@ class SigninViewModel : ViewModel() {
             _loading.value=true
             try {
                 val credintal=GoogleAuthProvider.getCredential(account.idToken,null)
+                auth.signInWithCredential(credintal).await()
+                val res= db.collection("users").document(auth.currentUser!!.uid).get().await()
+                if (!res.exists()){
+                    val user=User(auth.currentUser!!.email,auth.currentUser!!.photoUrl.toString()
+                        ,auth.currentUser!!.displayName, emptyList(), emptyList())
+                    db.collection("users").document(auth.currentUser!!.uid).set(user).await()
+                }
+                _navigate_to_home_fragment.value=true
+            }catch (e:Exception){
+                Log.e(Constants.Firebase,e.message.toString())
+            }
+            _loading.value=false
+        }
+    }
+
+    fun signinwithfacebook(token: AccessToken) {
+        viewModelScope.launch {
+            _loading.value=true
+            try {
+                val credintal=FacebookAuthProvider.getCredential(token.token)
                 auth.signInWithCredential(credintal).await()
                 val res= db.collection("users").document(auth.currentUser!!.uid).get().await()
                 if (!res.exists()){

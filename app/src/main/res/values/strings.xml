@@ -42,4 +42,8 @@
     <string name="your_web_client_id" >799162446519-cejfjajj2eiu818t4616klpa386rjmnb.apps.googleusercontent.com</string>
     <string name="google_sign_in_fail">opreation cancled failed to sign in</string>
     <string name="firebase_email_exists">This email address  already exists</string>
+    <string name="facebook_app_id">1705523536498260</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+    <string name="facebook_cancel">user cancel login cant continue</string>
 </resources>
